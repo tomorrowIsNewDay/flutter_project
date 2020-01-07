@@ -8,4 +8,8 @@ class ConfigModel {
       searchUrl: json['searchUrl']
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {searchUrl: searchUrl};
+  }
 }

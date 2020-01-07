@@ -16,6 +16,13 @@ class GridNavModel {
         )
         : null;
   }
+  Map<String, dynamic>toJson(){
+    return {
+      'hotel': hotel,
+      'flight': flight,
+      'travel': travel
+    };
+  }
 }
 
 //"startColor": "4b8fed",
@@ -58,5 +65,17 @@ class GridNavItem{
       item3: CommonModel.fromJson(json['item3']),
       item4: CommonModel.fromJson(json['item4'])
     );
+  }
+
+  Map<String, dynamic> toJson(){
+    return {
+      startColor: startColor,
+      endColor: endColor,
+      'mainItem': mainItem,
+      'item1': item1,
+      'item2': item2,
+      'item3': item3,
+      'item4': item4
+    };
   }
 }

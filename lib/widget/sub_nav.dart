@@ -77,7 +77,7 @@ class SubNav extends StatelessWidget {
             )
           ],
         ),
-      );,
+      ),
     );
   }
 }

@@ -17,6 +17,15 @@ class CommonModel {
     );
   }
   Map<String, dynamic>toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['icon'] = this.icon;
+    data['url'] = this.url;
+    data['title'] = this.title;
+    data['statusBarColor'] = this.statusBarColor;
+    data['hideAppBar'] = this.hideAppBar;
+    return data;
+
     return {
       icon: icon,
       title: title,

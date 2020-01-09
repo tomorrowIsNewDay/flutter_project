@@ -36,15 +36,26 @@ class SalesBoxModel {
   }
 
   Map<String, dynamic>toJson() {
-    return {
-      icon: icon,
-      moreUrl: moreUrl,
-      'bigCard1': bigCard1,
-      'bigCard2': bigCard2,
-      'smallCard1': smallCard1,
-      'smallCard2': smallCard2,
-      'smallCard3': smallCard3,
-      'smallCard4': smallCard4
-    };
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['icon'] = icon;
+    data['moreUrl'] = moreUrl;
+    data['bigCard1'] = bigCard1.toJson();
+    data['bigCard2'] = bigCard2.toJson();
+    data['smallCard1'] = smallCard1.toJson();
+    data['smallCard2'] = smallCard2.toJson();
+    data['smallCard3'] = smallCard3.toJson();
+    data['smallCard4'] = smallCard4.toJson();
+    return data;
+
+//    return {
+//      icon: icon,
+//      moreUrl: moreUrl,
+//      'bigCard1': bigCard1,
+//      'bigCard2': bigCard2,
+//      'smallCard1': smallCard1,
+//      'smallCard2': smallCard2,
+//      'smallCard3': smallCard3,
+//      'smallCard4': smallCard4
+//    };
   }
 }

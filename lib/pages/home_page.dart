@@ -20,10 +20,12 @@ import 'package:flutter_trip/widget/grid_nav.dart';
 import 'package:flutter_trip/widget/loading_container.dart';
 import 'package:flutter_trip/widget/local_nav.dart';
 import 'package:flutter_trip/widget/sales_box.dart';
+import 'package:flutter_trip/widget/search_bar.dart';
 import 'package:flutter_trip/widget/sub_nav.dart';
 import 'package:flutter_trip/widget/webview.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
+const SEARCH_BAR_DEFAULT_TEXT = '网红打卡地 景点 酒店 美食';
 
 class HomePage extends StatefulWidget {
   @override
@@ -116,28 +118,51 @@ class _HomePageState extends State<HomePage> {
                       //滚动且是列表滚动的时候
                       _onScroll(scrollNotification.metrics.pixels);
                     }
+                    return null;
                   },
                   child: _listView,
                 ),
               )
             ),
-            Opacity(
-              opacity: appBarAlpha,
-              child: Container(
-                height: 80,
-                decoration: BoxDecoration(color: Colors.white),
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 20),
-                    child: Text('首页'),
-                  ),
-                ),
-              ),
-            )
+            _appBar
           ],
         ),
       )
     );
+  }
+
+  _jumpToSearch(){
+
+  }
+
+  _jumpToSpeak() {
+
+  }
+
+  Widget get _appBar {
+    return SearchBar(
+        searchBarType: appBarAlpha > 0.2 ?
+                      SearchBarType.homeLight :
+                      SearchBarType.home,
+        inputBoxClick:  _jumpToSearch,
+        speakClick: _jumpToSpeak,
+        defaultText: SEARCH_BAR_DEFAULT_TEXT,
+        leftButtonClick: (){},
+    );
+
+//    Opacity(
+//      opacity: appBarAlpha,
+//      child: Container(
+//        height: 80,
+//        decoration: BoxDecoration(color: Colors.white),
+//        child: Center(
+//          child: Padding(
+//            padding: EdgeInsets.only(top: 20),
+//            child: Text('首页'),
+//          ),
+//        ),
+//      ),
+//    );
   }
 
   Widget get _listView {

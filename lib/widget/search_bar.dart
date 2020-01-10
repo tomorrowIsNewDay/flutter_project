@@ -150,7 +150,7 @@ class _SearchBarState extends State<SearchBar> {
       inputBoxColor = Color(int.parse('0xffEDEDED'));
     }
     return Container(
-      height: 30,
+      height: 36,
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
       decoration: BoxDecoration(
         color: inputBoxColor,
@@ -179,7 +179,7 @@ class _SearchBarState extends State<SearchBar> {
                     fontWeight: FontWeight.w300
                   ),
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                    contentPadding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                     border: InputBorder.none,
                     hintText: widget.hint ?? '',
                     hintStyle: TextStyle(fontSize: 15)

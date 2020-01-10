@@ -140,15 +140,44 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget get _appBar {
-    return SearchBar(
-        searchBarType: appBarAlpha > 0.2 ?
-                      SearchBarType.homeLight :
-                      SearchBarType.home,
-        inputBoxClick:  _jumpToSearch,
-        speakClick: _jumpToSpeak,
-        defaultText: SEARCH_BAR_DEFAULT_TEXT,
-        leftButtonClick: (){},
+    return Column(
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              // AppBar渐变遮造背景
+              colors: [Color(0x66000000), Colors.transparent],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            )
+          ),
+          child: Container(
+            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+            height: 80.0,
+            decoration: BoxDecoration(
+              color: Color.fromARGB((appBarAlpha * 255).toInt(), 255, 255, 255),
+            ),
+            child: SearchBar(
+              searchBarType: appBarAlpha > 0.2 ?
+              SearchBarType.homeLight :
+              SearchBarType.home,
+              inputBoxClick:  _jumpToSearch,
+              speakClick: _jumpToSpeak,
+              defaultText: SEARCH_BAR_DEFAULT_TEXT,
+              leftButtonClick: (){},
+            ),
+          ),
+        ),
+        Container(
+          height: appBarAlpha > 0.2 ? 0.5 : 0,
+          decoration: BoxDecoration(
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 0.5)]
+          ),
+        )
+      ],
     );
+
+
 
 //    Opacity(
 //      opacity: appBarAlpha,

@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_trip/dao/search_dao.dart';
 import 'package:flutter_trip/model/search_model.dart';
 import 'package:flutter_trip/widget/search_bar.dart';
+import 'package:flutter_trip/widget/webview.dart';
 
 const URL = 'https://m.ctrip.com/restapi/h5api/searchapp/search?source=mobileweb&action=autocomplete&contentType=json&keyword=';
 
@@ -106,10 +107,14 @@ class _SearchPageState extends State<SearchPage> {
         return;
       }
       String url = widget.searchUrl + text;
-      SearchDao.fetch(url).then((SearchModel value){
-        setState(() {
-          searchModel = value;
-        });
+      SearchDao.fetch(url, text).then((SearchModel value){
+        // 只有当前输入的keyword和服务器返回的keyword 一致才渲染
+        // 优化点，避免短时间内频繁输入，导致输入和查询的数据不匹配
+        if(value.keyword == keyword){
+          setState(() {
+            searchModel = value;
+          });
+        }
       }).catchError((e){
         print(e);
       });
@@ -118,8 +123,33 @@ class _SearchPageState extends State<SearchPage> {
   Widget _item(int position){
     if(searchModel == null || searchModel.data == null ) return null;
     SearchItem item = searchModel.data[position];
-    return Text(
-      item.word,
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder:
+            (context)=> WebView(url: item.url, title: '详情')));
+      },
+      child: Container(
+        padding: EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 0.3, color: Colors.grey))
+        ),
+        child: Row(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Container(
+                  width: 300,
+                    child: Text('${item.word} ${item.districtname??''} ${item.zonename??''}'),
+                ),
+                Container(
+                  width: 300,
+                  child: Text('${item.price??''} ${item.type??''}'),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

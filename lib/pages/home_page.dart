@@ -4,19 +4,17 @@
  * https://coding.imooc.com/class/321.html
  * 课程代码、文档：
  * https://git.imooc.com/coding-321/
- * 课程辅导答疑区：
- * http://coding.imooc.com/learn/qa/321.html
  */
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_trip/dao/home_dao.dart';
 import 'package:flutter_trip/model/common_model.dart';
 import 'package:flutter_trip/model/grid_mav_model.dart';
-import 'dart:convert';
 
 import 'package:flutter_trip/model/home_model.dart';
 import 'package:flutter_trip/model/sales_box_model.dart';
 import 'package:flutter_trip/pages/search_page.dart';
+import 'package:flutter_trip/pages/speak_page.dart';
 import 'package:flutter_trip/widget/grid_nav.dart';
 import 'package:flutter_trip/widget/loading_container.dart';
 import 'package:flutter_trip/widget/local_nav.dart';
@@ -139,7 +137,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   _jumpToSpeak() {
-
+    Navigator.push(context, MaterialPageRoute(builder:
+        (context)=> SpeakPage()));
   }
 
   Widget get _appBar {

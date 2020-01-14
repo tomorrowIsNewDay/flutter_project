@@ -2,6 +2,7 @@
  * 语音识别
  */
 import 'package:flutter/material.dart';
+import 'package:flutter_trip/pages/search_page.dart';
 
 class SpeakPage extends StatefulWidget {
 
@@ -79,12 +80,44 @@ class _SpeakPageState extends State<SpeakPage> with SingleTickerProviderStateMix
     );
   }
 
-  _speakStart(){
+  _speakStart() async{
     controller.forward();
+
+    setState(() {
+      speakTips = '-识别中-';
+    });
+
+    await Future.delayed(Duration(milliseconds: 1000), () {
+      return Future.value(123);
+    });
+//    AsrManager.start().then((text){
+    // 调用语音接口，赋值
+          setState(() {
+            speakResult = '广东汕尾';
+          });
+          //先关闭当前页面
+          // 再跳转页面
+          Navigator.pop(context);
+          print(speakResult);
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) =>
+              SearchPage(keyword: '广东汕尾',hint: '广东汕尾',)
+          ));
+
+//    }).catchError((e{}))
   }
   _speakStop(){
+    setState(() {
+      speakResult = '';
+      speakTips = '长按说话';
+    });
+
     controller.reset();
     controller.stop();
+//    AsrManager.stop();
+
+
+
   }
   _speakCancel(){
 
@@ -102,7 +135,7 @@ class _SpeakPageState extends State<SpeakPage> with SingleTickerProviderStateMix
               _speakStop();
             },
             onTapCancel: (){
-              _speakCancel();
+              _speakStop();
             },
             child: Center(
               child: Column(

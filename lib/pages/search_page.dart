@@ -30,6 +30,14 @@ class _SearchPageState extends State<SearchPage> {
   String keyword;
 
   @override
+  void initState() {
+    if(widget.keyword != null){
+      _onTextChange(widget.keyword);
+    }
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(

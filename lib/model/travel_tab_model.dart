@@ -1,5 +1,5 @@
 
-
+// 旅拍类别模型
 class TravelTabModel {
   String url;
   List<TravelTab> tabs;

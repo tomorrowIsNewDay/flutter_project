@@ -1,12 +1,12 @@
 
 // 旅拍页面模型
-class TravelModel {
+class TravelItemModel {
   int totalCount;
   List<TravelItem> resultList;
 
-  TravelModel({this.totalCount,this.resultList});
+  TravelItemModel({this.totalCount,this.resultList});
 
-  TravelModel.fromJson(Map<String,dynamic> json){
+  TravelItemModel.fromJson(Map<String,dynamic> json){
     totalCount = json['url'];
     if(json['resultList'] != null) {
       resultList = new List<TravelItem>();
@@ -35,7 +35,7 @@ class TravelItem {
 
   TravelItem.formJson(Map<String, dynamic> json) {
     type = json['type'];
-    article = json['article'] != null ? new Article.formJson(json['article']) : null;
+    article = json['article'] != null ? new Article.fromJson(json['article']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -106,7 +106,7 @@ class Article {
     this.collectCount,
     this.articleStatus,
     this.poiName,
-  })
+  });
 
   Article.fromJson(Map<String, dynamic> json) {
     articleId = json['articleId'];
@@ -119,35 +119,35 @@ class Article {
       images = new List<Images>();
       json['images'].forEach((v){
         images.add(new Images.fromJson(v));
-      })
+      });
     }
     hasVideo = json['hasVideo'];
     readCount = json['readCount'];
     likeCount = json['likeCount'];
     commentCount = json['commentCount'];
-//    if(json['urls'] != null) {
-//      urls = new List<Urls>();
-//      json['urls'].forEach((v){
-//        urls.add(new Urls.fromJson(v));
+    if(json['urls'] != null) {
+      urls = new List<Urls>();
+      json['urls'].forEach((v){
+        urls.add(new Urls.fromJson(v));
+      });
+    }
+//    if(json['tags'] != null) {
+//      tags = new List<Null>();
+//      json['tags'].forEach((v){
+//        tags.add(new Null.fromJson(v));
 //      })
 //    }
-    if(json['tags'] != null) {
-      tags = new List<Null>();
-      json['tags'].forEach((v){
-        tags.add(new Null.fromJson(v));
-      })
-    }
     if(json['topics'] != null) {
       topics = new List<Topics>();
       json['topics'].forEach((v){
         topics.add(new Topics.fromJson(v));
-      })
+      });
     }
     if(json['pois'] != null) {
       pois = new List<Pois>();
       json['pois'].forEach((v){
         pois.add(new Pois.fromJson(v));
-      })
+      });
     }
     publishTime = json['publishTime'];
     publishTimeDisplay = json['publishTimeDisplay'];
@@ -172,8 +172,8 @@ class Article {
     data['productType'] = this.productType;
     data['sourceType'] = this.sourceType;
     data['articleTitle'] = this.articleTitle;
-    if(this.anthor != null) {
-      data['anthor'] = this.anthor.toJson();
+    if(this.author != null) {
+      data['anthor'] = this.author.toJson();
     }
     if(this.images != null) {
       data['images'] = this.images.map((v) => v.toJson()).toList();
@@ -202,7 +202,7 @@ class Author {
     this.coverImage,
     this.identityType,
     this.tag,
-  })
+  });
 
   Author.fromJson(Map<String, dynamic> json) {
     authorId = json['authorId'];
@@ -241,7 +241,7 @@ class CoverImage {
   String dynamicUrl;
   String originalUrl;
 
-  CoverImage({this.dynamicUrl, this.originalUrl})
+  CoverImage({this.dynamicUrl, this.originalUrl});
 
   CoverImage.fromJson(Map<String, dynamic> json) {
     dynamicUrl = json['dynamicUrl'];
@@ -267,7 +267,7 @@ class Images {
   int mediaType;
   bool isWaterMarked;
 
-  Images({this.imageId, this.dynamicUrl, this.originalUrl, this.width, this.heigth, this.mediaType, this.isWaterMarked})
+  Images({this.imageId, this.dynamicUrl, this.originalUrl, this.width, this.height, this.mediaType, this.isWaterMarked});
 
   Images.fromJson(Map<String, dynamic> json) {
     dynamicUrl = json['dynamicUrl'];
@@ -301,7 +301,7 @@ class Urls {
   String wxUrl;
 
 
-  Urls({this.version, this.appUrl, this.h5Url, this.wxUrl})
+  Urls({this.version, this.appUrl, this.h5Url, this.wxUrl});
 
   Urls.fromJson(Map<String, dynamic> json) {
     version = json['version'];
@@ -329,7 +329,7 @@ class Topics {
   int level;
 
 
-  Topics({this.topicId, this.topicName, this.level})
+  Topics({this.topicId, this.topicName, this.level});
 
   Topics.fromJson(Map<String, dynamic> json) {
     topicId = json['topicId'];
@@ -362,7 +362,7 @@ class Pois {
   String countryName;
 
 
-  Pois({this.poiType, this.poiId, this.poiName, this.businessId, this.districtId, this.poiExt, this.source, this.isMain , this.isInChina, this.countryName })
+  Pois({this.poiType, this.poiId, this.poiName, this.businessId, this.districtId, this.poiExt, this.source, this.isMain , this.isInChina, this.countryName });
 
   Pois.fromJson(Map<String, dynamic> json) {
     poiType = json['poiType'];
@@ -403,7 +403,7 @@ class PoiExt {
   String appUrl;
 
 
-  PoiExt({this.h5Url, this.h5Url})
+  PoiExt({this.h5Url, this.appUrl});
 
   PoiExt.fromJson(Map<String, dynamic> json) {
     h5Url = json['h5Url'];

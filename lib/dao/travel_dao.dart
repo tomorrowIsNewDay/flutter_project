@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 var Params = {
   "districtId": -1,
-  "groupChannelCode": "RX-OMF",
+  "groupChannelCode": "tourphoto_global1", //"""RX-OMF",
   "type": null,
   "lat": -180,
   "lon": -180,
@@ -28,11 +28,12 @@ class TravelDao {
       String groupChannelCode,
       int pageIndex,
       int pageSize) async {
-    Map paramsMap = Params['pagePara'];
-    paramsMap['pageIndex'] = pageIndex;
-    paramsMap['pageSize'] = pageSize;
-    paramsMap['groupChannelCode'] = groupChannelCode;
-
+//    Map paramsMap = Params['pagePara'];
+//    paramsMap['pageIndex'] = pageIndex;
+//    paramsMap['pageSize'] = pageSize;
+    print('发地方');
+//    paramsMap['groupChannelCode'] = groupChannelCode;
+    print('12312');
     final response = await http.post(url, body: jsonEncode(Params));
     if(response.statusCode == 200) {
       //解决中文乱码问题

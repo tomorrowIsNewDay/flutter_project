@@ -72,20 +72,27 @@ class _TravelTabPageState extends State<TravelTabPage> {
     return Scaffold(
       body: new StaggeredGridView.countBuilder(
         crossAxisCount: 4,
-        itemCount: 8,
-        itemBuilder: (BuildContext context, int index) => new Container(
-            color: Colors.green,
-            child: new Center(
-              child: new CircleAvatar(
-                backgroundColor: Colors.white,
-                child: new Text('$index'),
-              ),
-            )),
+        itemCount: travelItems?.length??0,
+        itemBuilder: (BuildContext context, int index) => _TravelItem(index: index, item: travelItems[index]),
         staggeredTileBuilder: (int index) =>
-        new StaggeredTile.count(2, index.isEven ? 2 : 1),
-        mainAxisSpacing: 4.0,
-        crossAxisSpacing: 4.0,
+        new StaggeredTile.fit(2),
       )
+    );
+  }
+}
+
+
+class _TravelItem extends StatelessWidget{
+  final TravelItem item;
+  final int index;
+
+  const _TravelItem({Key key, this.item, this.index}) : super(key: key);
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text('$index'),
     );
   }
 }

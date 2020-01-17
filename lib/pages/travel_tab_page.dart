@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 /**
  * 《Flutter从入门到进阶-实战携程网App》
  * 课程地址：
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_trip/dao/travel_dao.dart';
 import 'package:flutter_trip/model/travel_model.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_trip/widget/loading_container.dart';
 import 'package:flutter_trip/widget/webview.dart';
 
 const PAGE_SIZE = 10;
@@ -30,17 +32,32 @@ class TravelTabPage extends StatefulWidget {
 class _TravelTabPageState extends State<TravelTabPage> with AutomaticKeepAliveClientMixin{
   List<TravelItem> travelItems;
   int pageIndex = 1;
+  bool _loading = true;
+  //下拉加载更多 controller
+  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     _lodaData();
+    _scrollController.addListener((){
+      // 当滚动的位置到达临界点
+      if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent){
+        _lodaData(loadMore: true);
+      }
+    });
     super.initState();
   }
 
-  void _lodaData() {
+  void _lodaData({loadMore=false}) {
+    if(loadMore){
+      pageIndex++;
+    }else{
+      pageIndex = 1;
+    }
     TravelDao.fetch(widget.travelUrl??TRAVEL_URL, widget.groupChannelCode, pageIndex, PAGE_SIZE)
         .then((TravelItemModel model){
           setState(() {
+            _loading = false;
             List<TravelItem> items = _filterItems(model.resultList);
             if(travelItems != null){
               travelItems.addAll(items);
@@ -49,6 +66,7 @@ class _TravelTabPageState extends State<TravelTabPage> with AutomaticKeepAliveCl
             }
           });
     }).catchError((e){
+      _loading = false;
       print(e);
     });
   }
@@ -75,14 +93,31 @@ class _TravelTabPageState extends State<TravelTabPage> with AutomaticKeepAliveCl
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: new StaggeredGridView.countBuilder(
-        crossAxisCount: 4,
-        itemCount: travelItems?.length??0,
-        itemBuilder: (BuildContext context, int index) => _TravelItem(index: index, item: travelItems[index]),
-        staggeredTileBuilder: (int index) =>
-        new StaggeredTile.fit(2),
+      body: LoadingContainer(
+        isLoading: _loading,
+        child: RefreshIndicator(
+          onRefresh: _handleRefresh,
+          child: MediaQuery.removePadding(
+              removeTop: true,
+              context: context,
+              child: new StaggeredGridView.countBuilder(
+                controller: _scrollController,
+                crossAxisCount: 4,
+                itemCount: travelItems?.length??0,
+                itemBuilder: (BuildContext context, int index) => _TravelItem(index: index, item: travelItems[index]),
+                staggeredTileBuilder: (int index) =>
+                new StaggeredTile.fit(2),
+              )
+          ),
+        ),
       )
     );
+  }
+
+  //上拉刷新
+  Future<Null> _handleRefresh() async{
+    _lodaData();
+    return null;
   }
 }
 

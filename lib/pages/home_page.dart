@@ -22,6 +22,7 @@ import 'package:flutter_trip/widget/sales_box.dart';
 import 'package:flutter_trip/widget/search_bar.dart';
 import 'package:flutter_trip/widget/sub_nav.dart';
 import 'package:flutter_trip/widget/webview.dart';
+import 'package:flutter_splash_screen/flutter_splash_screen.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 const SEARCH_BAR_DEFAULT_TEXT = '网红打卡地 景点 酒店 美食';
@@ -49,6 +50,10 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration(milliseconds: 3600),(){
+      FlutterSplashScreen.hide();
+    });
+    
     _handleRefresh();
   }
 

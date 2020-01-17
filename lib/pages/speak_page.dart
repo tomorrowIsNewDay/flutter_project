@@ -93,7 +93,7 @@ class _SpeakPageState extends State<SpeakPage> with SingleTickerProviderStateMix
 //    AsrManager.start().then((text){
     // 调用语音接口，赋值
           setState(() {
-            speakResult = '广东汕尾';
+            speakResult = '杭州西湖';
           });
           //先关闭当前页面
           // 再跳转页面
@@ -101,7 +101,7 @@ class _SpeakPageState extends State<SpeakPage> with SingleTickerProviderStateMix
           print(speakResult);
           Navigator.push(context, MaterialPageRoute(
             builder: (context) =>
-              SearchPage(keyword: '广东汕尾',hint: '广东汕尾',)
+              SearchPage(keyword: '杭州西湖',hint: '杭州西湖',)
           ));
 
 //    }).catchError((e{}))

@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
     Future.delayed(Duration(milliseconds: 3600),(){
       FlutterSplashScreen.hide();
     });
-    
+
     _handleRefresh();
   }
 

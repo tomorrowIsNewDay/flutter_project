@@ -25,10 +25,10 @@
 - 封装webview.dart
 
 #### 项目插件
-<a href='./doc/package.md'>插件文档</a>
+<a href='./doc/package.md'>插件文档 /doc/package.md</a>
 
 #### 项目优化及打包发布流程
-<a href='./doc/point.md'>文档说明</a>
+<a href='./doc/point.md'>文档说明 /doc/point.md</a>
 
 
 #### 如何运行？

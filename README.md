@@ -2,14 +2,14 @@
 **flutter + h5页面**
 
 #### 项目目录
---- lib 
------ dao        // interface   
------ json
------ model      // model   
------ navigator  // 导航   
------ pages      // 页面文件
------ widget     // 通用widget
------ main.dart  //根文件
+--- lib <br/>
+----- dao        // interface    <br/>
+----- json  <br/>
+----- model      // model    <br/>
+----- navigator  // 导航    <br/>
+----- pages      // 页面文件 <br/>
+----- widget     // 通用widget <br/>
+----- main.dart  //根文件<br/>
 
 #### 开发流程
 - 创建model文件
